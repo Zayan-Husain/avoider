@@ -216,5 +216,7 @@ class yentity
 		}
 		return ret;
 	}//end clicked
+	
+	rand(range){return range * Math.random() + 1;}//end rand
   
 }//end yentity
