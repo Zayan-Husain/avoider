@@ -12,11 +12,16 @@ function setup() {
 	var ph = loadImage('img/ph.jpg');
 
 	//create worlds
+	var ymenu_world = new menu_world('menu');
+	var ygame_over_world = new game_over_world('game_over');
 	var ygame_world = new game_world('game_world');
+	//add worlds
+	yeng.add_world(ymenu_world);
+	yeng.add_world(ygame_over_world);
 	yeng.add_world(ygame_world);
 
 	//set current world
-	yeng.set_c_world('game_world');
+	yeng.set_c_world('menu');
 }
 
 function draw() {
@@ -29,21 +34,4 @@ function draw() {
 	current_world.update();
 	current_world.render();
 
-	///old test/////
-	/*	
-	tste.update();
-	tste.render();
-	
-	tste2.update();
-	tste2.render();
-	
-	tste2.move_by(5,0);
-	
-	//if offscean to the right set x to 10
-	if(tste2.x>yscreen.w){tste2.sx(10);}
-	//rotate test
-	tste2.rot+=0.1;
-	//test collision detection
-	console.log("hit test: "+tste.hit_test(tste2,0,0));
-	*/
 }
