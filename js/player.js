@@ -32,6 +32,8 @@ class player extends yentity {
 		var t = this;
 		if (t.hit_test('mover', 0, 0)) {
 			console.log('Hit Mover');
+			//go to game over world
+			t.world.change_world("game_over",true);
 		}
 	}
 }

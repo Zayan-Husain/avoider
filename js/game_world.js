@@ -8,14 +8,20 @@ class game_world extends world {
 	}
 
 	init() {
+		var t = this;
+		//reset all
+		t.entitys = [];
+		t.points = 0;
+		t.numberOfMovers = 0;
+		//end reset
 		var ph = loadImage('img/ph.jpg');
-
+        
 		var yplayer = new player(200, 300, '');
 		yplayer.grafic_type = 'none';
 		yplayer.debug = true;
 
-		this.add(yplayer);
-		this.create_movers(1);
+		t.add(yplayer);
+		t.create_movers(1);
 	} //end init
 
 	create_movers(number) {
