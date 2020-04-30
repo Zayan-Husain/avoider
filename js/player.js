@@ -30,11 +30,21 @@ class player extends yentity {
 	} //end move
 	collideCheck() {
 		var t = this;
+		var isCoin = t.hit_test('coin', 0, 0);
 		if (t.hit_test('mover', 0, 0)) {
 			console.log('Hit Mover');
 			//go to game over world
-			t.world.change_world("game_over",true);
+			t.world.change_world('game_over', true);
 		}
+		if (isCoin) {
+			t.world.points += 500;
+			t.world.remove(isCoin);
+		}
+	} //end collide check
+	render() {
+		super.render();
+		//set shape color to white
+		this.sprite.shapeColor = color(255, 255, 255);
 	}
 }
 // var t = this;
