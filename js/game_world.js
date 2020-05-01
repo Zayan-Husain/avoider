@@ -1,11 +1,17 @@
 class game_world extends world {
-	constructor(name2) {
+	/*
+	name2 is the worlds name
+	wh is the screen width height (an object like {w:200,h:300})
+	*/
+	constructor(name2,wh) {
 		super(name2);
 		var t = this;
 		t.points = 0;
 		t.numberOfMovers = 0;
 		t.maxNumberOfMovers = 99;
 		t.rank = 'average';
+		t.sw = wh.w;//screen width height
+		t.sh = wh.h;
 	}
 
 	init() {
@@ -43,8 +49,8 @@ class game_world extends world {
 		super.render();
 		fill(255);
 		textAlign(CENTER);
-		text('Score: ' + t.points, 640 / 2, 20);
-		text('Rank: ' + t.rank, 640 / 2, 40);
+		text('Score: ' + t.points, t.sw / 2, 20);
+		text('Rank: ' + t.rank, t.sw / 2, 40);
 	} //end render
 	update() {
 		super.update();
@@ -63,6 +69,8 @@ class game_world extends world {
 		}
 		if (p == 1000) {
 			this.create_movers(1);
+			this.create_mine();
+			this.create_mine();
 			this.create_mine();
 			this.rank = 'Good Avoider';
 		}
@@ -112,9 +120,18 @@ class game_world extends world {
 	} //end game progression
 	addCoin() {
 		var t = this;
-		var RPX = Math.floor(Math.random() * 640 + 1);
-		var RPY = Math.floor(Math.random() * 480 + 1);
+		var RPX = Math.floor(Math.random() * t.sw + 1);
+		var RPY = Math.floor(Math.random() * t.sh + 1);
+		var dist = 100;
+		//make sure the pos is not close to wall
+		while(RPY >=t.sh-dist || RPY<=dist || RPX> t.sw-dist || RPX<=dist)
+		{
+			//new random pos
+			RPX = Math.floor(Math.random() * t.sw + 1);
+		    RPY = Math.floor(Math.random() * t.sh + 1);
+		}
 		var coinI = new coin(RPX, RPY);
+		//coinI.debug = true;
 		t.add(coinI);
 	}
 	create_mine() {

@@ -63,9 +63,25 @@ class mover extends yentity {
 	isMine() {
 		var t = this;
 		t.speed = 0;
-		var rx = t.rand(200);
-		var ry = t.rand(200);
+		//set to random pos
+		var rx = t.rand(t.world.sw);//sw = screen width sh = screen height
+		var ry = t.rand(t.world.sh);
 		t.sx(rx);
 		t.sy(ry);
+		//get player
+		var player = t.get_by_type("player")[0];
+		//get distance from player
+		var a = player.x1 - t.x;
+		var b = player.y - t.y;
+		var dist = Math.sqrt( a*a + b*b );
+		//make sure it wont spawn on player or too close
+		while(dist<30)
+		{
+			//set to random pos
+			var rx = t.rand(t.world.sw);
+			var ry = t.rand(t.world.sh);
+			t.sx(rx);
+			t.sy(ry);
+		}
 	}
 }
